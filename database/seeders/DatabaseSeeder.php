@@ -2,33 +2,25 @@
 
 namespace Database\Seeders;
 
+use App\Models\Listing;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $admin = User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            ['name' => 'Test User', 'password' => 'password', 'is_admin' => true]
+        );
 
-        \App\Models\User::factory()->create([
-             'name' => 'Test User',
-             'email' => 'test@example.com',
-             'is_admin' => true,
-         ]);
-         \App\Models\User::factory()->create([
-             'name' => 'Test User',
-             'email' => 'test2@example.com',
-         ]);
-        \App\Models\Listing::factory(10)->create(
-            ['by_user_id' => 1]
+        $user = User::firstOrCreate(
+            ['email' => 'test2@example.com'],
+            ['name' => 'Test User 2', 'password' => 'password']
         );
-         \App\Models\Listing::factory(10)->create(
-            ['by_user_id' => 2]
-        );
+
+        Listing::factory(10)->create(['by_user_id' => $admin->id]);
+        Listing::factory(10)->create(['by_user_id' => $user->id]);
     }
 }
