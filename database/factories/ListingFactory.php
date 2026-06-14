@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\User;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Listing>
  */
@@ -17,6 +17,7 @@ class ListingFactory extends Factory
     public function definition(): array
     {
         return [
+            'title' => fake()->sentence(4),
             'bedrooms' => fake()->numberBetween(1, 7),
             'bathrooms' => fake()->numberBetween(1, 7),
             'area' => fake()->numberBetween(500, 5000),
@@ -25,6 +26,7 @@ class ListingFactory extends Factory
             'street' => fake()->streetName(),
             'street_number' => fake()->numberBetween(1, 1000),
             'price' => fake()->numberBetween(50_000, 2_000_000),
+            'by_user_id' => User::factory(),
         ];
     }
 }

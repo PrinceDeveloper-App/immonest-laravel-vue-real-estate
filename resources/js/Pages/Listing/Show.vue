@@ -8,6 +8,7 @@
         <template #header>
           Basic info
         </template>
+        <div v-if="listing.title" class="text-xl font-bold mb-2">{{ listing.title }}</div>
         <Price :price="listing.price" class="text-2xl font-bold" />
         <ListingSpace :listing="listing" class="text-lg" />
         <ListingAddress :listing="listing" class="text-gray-500" />

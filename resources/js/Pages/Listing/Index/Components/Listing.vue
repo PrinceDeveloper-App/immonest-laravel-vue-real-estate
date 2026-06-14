@@ -4,6 +4,7 @@
       <Link
         :href="route('listing.show', {listing: listing.id})"
       >
+        <div v-if="listing.title" class="text-lg font-semibold mb-1">{{ listing.title }}</div>
         <div class="flex items-center gap-1">
           <Price
             :price="listing.price"
@@ -18,13 +19,6 @@
           :listing="listing"
           class="text-gray-500"
         />
-      </Link>
-    </div>
-    <div>
-      <Link
-        :href="route('listing.edit', {listing: listing.id})"
-      >
-        Edit
       </Link>
     </div>
   </Box>
