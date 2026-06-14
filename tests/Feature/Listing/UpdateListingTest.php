@@ -10,6 +10,7 @@ test('user can update their listing', function () {
     $this->actingAs($user);
 
     $response = $this->put(route('listing.update', $listing), [
+        'title' => 'Updated Family Home',
         'city' => 'Cologne',
         'bedrooms' => 4,
         'bathrooms' => 2,

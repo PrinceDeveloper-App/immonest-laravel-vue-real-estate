@@ -1,6 +1,12 @@
 <template>
   <form @submit.prevent="create">
     <div class="grid grid-cols-6 gap-4">
+      <div class="col-span-6">
+        <label class="label">Title</label>
+        <input v-model="form.title" class="input" type="text" />
+        <InputError :message="form.errors.title" />
+      </div>
+
       <div class="col-span-2">
         <label class="label">Beds</label>
         <input v-model.number="form.bedrooms" class="input" type="text" />
@@ -60,6 +66,7 @@
 import { useForm } from '@inertiajs/vue3'
 import InputError from '@/Components/InputError.vue'
 const form = useForm({
+  title: null,
   bedrooms: 0,
   bathrooms: 0,
   area: 0,
@@ -69,16 +76,6 @@ const form = useForm({
   street_number: null,
   price: 0,
 })
-const create = () => form.post(route('listing.store'))
+const create = () => form.post(route('realtor.listing.store'))
 
 </script>
-
-<style scoped>
-label {
-  margin-right: 2em;
-}
-
-div {
-  padding: 2px
-}
-</style>

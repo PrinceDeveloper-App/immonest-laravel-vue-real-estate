@@ -11,6 +11,7 @@ class Listing extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
+        'title',
         'bedrooms',
         'bathrooms',
         'area',

@@ -5,6 +5,7 @@ test('authenticated user can create listing', function () {
     $this->actingAs($user);
 
     $response = $this->post(route('listing.store'), [
+        'title' => 'Cozy Family Home',
         'bedrooms' => 3,
         'bathrooms' => 2,
         'area' =>1200,

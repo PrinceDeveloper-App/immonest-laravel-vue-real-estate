@@ -1,6 +1,12 @@
 <template>
   <form @submit.prevent="update">
     <div class="grid grid-cols-6 gap-4">
+      <div class="col-span-6">
+        <label class="label">Title</label>
+        <input v-model="form.title" class="input" type="text" />
+        <InputError :message="form.errors.title" />
+      </div>
+
       <div class="col-span-2">
         <label class="label">Beds</label>
         <input v-model.number="form.bedrooms" class="input" type="text" />
@@ -63,6 +69,7 @@ const props = defineProps({
   listing: Object,
 })
 const form = useForm({
+  title: props.listing.title,
   bedrooms: props.listing.bedrooms,
   bathrooms: props.listing.bathrooms,
   area: props.listing.area,
@@ -72,16 +79,6 @@ const form = useForm({
   street_number: props.listing.street_number,
   price: props.listing.price,
 })
-const update = () => form.put(route('listing.update', { listing: props.listing.id }))
+const update = () => form.put(route('realtor.listing.update', { listing: props.listing.id }))
 
 </script>
-
-<style scoped>
-label {
-  margin-right: 2em;
-}
-
-div {
-  padding: 2px
-}
-</style>

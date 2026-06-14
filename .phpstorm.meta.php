@@ -2567,8 +2567,9 @@ namespace PHPSTORM_META {
 'signed','throttle','verified',);
         registerArgumentsSet('routes', 
 'debugbar.openhandler','debugbar.cache.delete','debugbar.queries.explain','debugbar.clockwork','debugbar.assets',
-'ignition.healthCheck','ignition.executeSolution','ignition.updateConfig','listing.index','listing.create','listing.store','listing.show',
-'listing.edit','listing.update','listing.destroy',);
+'ignition.healthCheck','ignition.executeSolution','ignition.updateConfig','listing.create','listing.store','listing.edit','listing.update',
+'listing.index','listing.show','login','login.store','logout',
+'user-account.create','user-account.store','realtor.listing.index','realtor.listing.destroy',);
         registerArgumentsSet('views', 
 'app','laravel-exceptions-renderer::components.card','laravel-exceptions-renderer::components.context','laravel-exceptions-renderer::components.editor','laravel-exceptions-renderer::components.header',
 'laravel-exceptions-renderer::components.icons.chevron-down','laravel-exceptions-renderer::components.icons.chevron-up','laravel-exceptions-renderer::components.icons.computer-desktop','laravel-exceptions-renderer::components.icons.moon','laravel-exceptions-renderer::components.icons.sun',
