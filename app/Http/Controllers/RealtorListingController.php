@@ -27,6 +27,7 @@ class RealtorListingController extends Controller
             ->listings()
             //->mostRecent()
             ->filter($filters)
+            ->withCount('images')
             ->paginate(5)
             ->withQueryString()
             ]
@@ -103,8 +104,15 @@ class RealtorListingController extends Controller
     public function destroy(Listing $listing)
     {
         $listing->deleteOrFail();
-        //return redirect()->back()
         return redirect()->route('realtor.listing.index')
             ->with('success', 'Listing deleted successfully.');
+    }
+
+    public function restore(Listing $listing)
+    {
+        $this->authorize('restore', $listing);
+        $listing->restore();
+        return redirect()->route('realtor.listing.index')
+            ->with('success', 'Listing restored successfully.');
     }
 }
