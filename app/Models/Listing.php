@@ -25,17 +25,26 @@ class Listing extends Model
     protected $sortable = [
         'price', 'created_at'
     ];
+
     public function owner()
     {
         return $this->belongsTo(\App\Models\User::class,
         'by_user_id');
     }
+
     public function images(): HasMany {
         return $this->HasMany(ListingImage::class);
     }
+
+    public function offers():HasMany
+    {
+        return $this->hasMany(Offer::class, 'listing_id');
+    }
+
     public function scopeMostRecent(Builder $query): Builder{
         return $query->orderByDesc('created_at');
     }
+    
     public function scopeFilter(Builder $query, array $filters): Builder{
         return $query->when(
                         $filters['priceFrom'] ?? false,
