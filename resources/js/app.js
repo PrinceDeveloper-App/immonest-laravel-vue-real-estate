@@ -5,6 +5,10 @@ import { ZiggyVue } from 'ziggy-js'
 import '../css/app.css'
 
 createInertiaApp({
+  progress: {
+    color: '#4f46e5',
+    delay: 250,
+  },
   resolve: async (name) => {
     const pages = import.meta.glob('./Pages/**/*.vue')
     const page = await pages[`./Pages/${name}.vue`]()
