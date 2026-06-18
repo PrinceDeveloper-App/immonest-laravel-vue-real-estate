@@ -17,8 +17,8 @@ Route::resource('listing', ListingController::class)
        ->only(['index', 'show']);
 
 Route::resource('listing.offer', ListingOfferController::class)
-  ->middleware('auth')
-  ->only(['store']);
+       ->middleware('auth')
+       ->only(['store']);
 
 Route::get('/login', [AuthController::class, 'create'])->name('login');
 Route::post('/login', [AuthController::class, 'store'])->name('login.store');
@@ -31,12 +31,13 @@ Route::prefix('realtor')
        ->name('realtor.')
        ->middleware('auth')
        ->group(function () {
-                     Route::resource('listing', RealtorListingController::class)
-              ->only(['index','edit', 'update','create', 'store', 'destroy']);
-              Route::put('listing/{listing}/restore', [RealtorListingController::class, 'restore'])
-              ->name('listing.restore')
+              Route::resource('listing', RealtorListingController::class)
+              // ->only(['index','edit', 'update','create', 'store', 'destroy']);
               ->withTrashed();
+              Route::put('listing/{listing}/restore', [RealtorListingController::class, 'restore'])
+                     ->name('listing.restore')
+                     ->withTrashed();
 
               Route::resource('listing.image', RealtorListingImageController::class)
-              ->only(['create', 'store', 'destroy']);
+                     ->only(['create', 'store', 'destroy']);
        });
