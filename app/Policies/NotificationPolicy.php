@@ -37,7 +37,7 @@ class NotificationPolicy
      */
     public function update(User $user, DatabaseNotification $databaseNotification): bool
     {
-        return $user->id === $databaseNotification->notifiable_id;
+        return $user->id == $databaseNotification->notifiable_id;
     }
 
     /**
