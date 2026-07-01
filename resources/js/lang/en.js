@@ -50,8 +50,13 @@ export default {
     baths: 'Baths',
     areaFrom: 'Area from',
     areaTo: 'Area to',
-    filterBtn: 'Filter',
+    filterBtn: 'Search',
     clearBtn: 'Clear',
+    priceRange: 'Price',
+    roomsLabel: 'Rooms',
+    areaLabel: 'Area',
+    pageTitle: 'Browse Properties',
+    pageSubtitle: 'Find your perfect home from our premium listings',
   },
 
   realtor: {

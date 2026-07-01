@@ -1,0 +1,87 @@
+/* ─────────────────────────────────────────────────────────────────
+   Intentionally NOT inside @layer — unlayered CSS has higher cascade
+   priority than @layer utilities, so these styles are never overridden.
+   ───────────────────────────────────────────────────────────────── */
+
+.filter-card {
+  @apply rounded-2xl px-6 py-5;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(11, 31, 59, 0.78);
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.filter-label {
+  @apply block text-[0.7rem] font-bold tracking-[0.16em] uppercase mb-1.5;
+  color: rgba(212, 175, 55, 0.80);
+}
+
+.filter-group {
+  @apply flex rounded-lg overflow-hidden;
+  border: 1.5px solid rgba(212, 175, 55, 0.60);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.20);
+}
+
+.filter-input {
+  @apply text-[0.8rem] font-medium px-3 py-2.5 appearance-none min-w-0 outline-none;
+  background: #ffffff !important;
+  color: #0B1F3B !important;
+  border: none !important;
+  transition: background 0.15s;
+}
+
+.filter-input:focus {
+  background: #F8F9FB !important;
+}
+
+.filter-input::placeholder {
+  color: rgba(11, 31, 59, 0.38);
+}
+
+.filter-input > option {
+  background: #ffffff;
+  color: #0B1F3B;
+}
+
+.filter-sep {
+  @apply w-px shrink-0 self-stretch;
+  background: rgba(212, 175, 55, 0.50);
+}
+
+.select-wrap {
+  @apply relative flex items-center;
+}
+
+.chevron {
+  @apply absolute right-2 w-3 h-3 pointer-events-none;
+  color: rgba(11, 31, 59, 0.42);
+}
+
+.btn-search {
+  @apply text-[0.8rem] font-bold py-2.5 px-7 rounded-lg tracking-[0.06em]
+         whitespace-nowrap cursor-pointer transition-all duration-150;
+  background: #D4AF37;
+  color: #0B1F3B;
+  border: none;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40);
+}
+
+.btn-search:hover  { filter: brightness(0.95); }
+.btn-search:active { transform: scale(0.98); }
+
+.btn-clear {
+  @apply text-[0.8rem] font-semibold py-2.5 px-5 rounded-lg tracking-[0.06em]
+         whitespace-nowrap cursor-pointer transition-all duration-200;
+  background: transparent;
+  color: rgba(212, 175, 55, 0.80);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+}
+
+.btn-clear:hover {
+  color: #D4AF37;
+  border-color: #D4AF37;
+  background: rgba(212, 175, 55, 0.08);
+}

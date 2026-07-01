@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./header.css";
+@import "./listing.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

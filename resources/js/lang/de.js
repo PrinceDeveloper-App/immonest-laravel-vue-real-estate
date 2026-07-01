@@ -50,8 +50,13 @@ export default {
     baths: 'Badezimmer',
     areaFrom: 'Fläche von',
     areaTo: 'Fläche bis',
-    filterBtn: 'Filtern',
+    filterBtn: 'Suchen',
     clearBtn: 'Zurücksetzen',
+    priceRange: 'Preis',
+    roomsLabel: 'Zimmer',
+    areaLabel: 'Fläche',
+    pageTitle: 'Immobilien durchsuchen',
+    pageSubtitle: 'Finden Sie Ihr perfektes Zuhause aus unseren Premium-Inseraten',
   },
 
   realtor: {
