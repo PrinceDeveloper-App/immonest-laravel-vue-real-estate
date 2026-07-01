@@ -1,0 +1,23 @@
+@layer components {
+  .header-btn-gold {
+    @apply whitespace-nowrap px-5 py-2 rounded text-xs font-semibold tracking-[0.06em]
+           bg-gold text-navy transition-all duration-200 hover:-translate-y-px hover:brightness-90;
+  }
+
+  .header-btn-outline {
+    @apply whitespace-nowrap px-5 py-2 rounded text-xs font-semibold tracking-[0.06em]
+           text-gold border border-gold/60 transition-all duration-200
+           hover:bg-gold hover:border-gold hover:text-navy;
+  }
+
+  .drawer-link {
+    @apply flex items-center gap-3.5 px-3.5 py-[0.7rem] rounded-md
+           text-white/75 text-[0.9rem] font-medium tracking-[0.03em]
+           transition-all duration-200;
+    border-left: 2px solid transparent;
+  }
+  .drawer-link:hover {
+    @apply text-gold pl-[1.125rem] bg-steel/80;
+    border-left-color: var(--color-gold);
+  }
+}

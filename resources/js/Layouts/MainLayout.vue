@@ -1,63 +1,26 @@
 <template>
-  <header class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
-    <div class="container mx-auto">
-      <nav class="p-4 flex items-center justify-between">
-        <div class="text-lg font-medium">
-          <Link :href="route('listing.index')">Listings</Link>
-        </div>
-        <div class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
-          <Link :href="route('listing.index')">ImmoNest</Link>
-        </div>
-        <div v-if="user" class="flex items-center space-x-4">
-          <Link
-            class="text-gray-500 relative pr-2 py-2 text-lg"
-            :href="route('notification.index')"
-          >
-            🔔
-            <div v-if="notificationCount" class="absolute right-0 top-0 w-5 h-5 bg-red-700 dark:bg-red-400 text-white font-medium border border-white dark:border-gray-900 rounded-full text-xs text-center">
-              {{ notificationCount }}
-            </div>
-          </Link>
+  <AppHeader />
 
-          <Link class="text-sm text-gray-600 dark:text-gray-400" :href="route('realtor.listing.index')">Hello, {{ user.name }}</Link>
-          <Link :href="route('realtor.listing.create')" class="btn-primary">+ New Listing</Link>
-          <Link :href="route('logout')" class="btn-secondary" method="delete">Logout</Link>
-        </div>
-        <div v-else class="flex items-center space-x-4">
-          <Link :href="route('user-account.create')" class="btn-primary">Register</Link>
-          <Link :href="route('login')" class="btn-primary">Login</Link>
-        </div>
-      </nav>
-    </div>
-  </header>
-  
-  <main class="container mx-auto p-4">
-    <div v-if="flashSuccess" class="mb-4 border rounded-md shadow-sm border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900 p-2">
+  <main class="container mx-auto p-6" style="background-color: #F8F9FB; min-height: calc(100vh - 80px);">
+    <div
+      v-if="flashSuccess"
+      class="mb-5 flex items-center gap-3 rounded-md px-4 py-3 text-sm font-medium shadow-sm"
+      style="background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #166534;"
+    >
+      <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+      </svg>
       {{ flashSuccess }}
     </div>
-    <slot>Default</slot>
+    <slot />
   </main>
 </template>
 
 <script setup>
-import {computed} from 'vue'
-import {Link, usePage} from '@inertiajs/vue3'
-import { route } from 'ziggy-js'
-// page.props.value.flash.success
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+import AppHeader from '@/Components/AppHeader.vue'
+
 const page = usePage()
 const flashSuccess = computed(() => page.props.flash.success)
-const user = computed(() => page.props.user)
-const notificationCount = computed(
-  () => Math.min(page.props.user?.notificationCount ?? 0, 9),
-)
 </script>
-
-<style scoped>
-.success {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}   
-</style>
