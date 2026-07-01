@@ -1,6 +1,7 @@
 export default {
   nav: {
     menu: 'MENU',
+    home: 'Home',
     properties: 'Properties',
     register: 'Register',
     signIn: 'Sign In',
@@ -89,6 +90,17 @@ export default {
     oldest: 'Oldest',
     pricey: 'Pricey',
     cheapest: 'Cheapest',
+  },
+
+  home: {
+    badge: 'PREMIUM REAL ESTATE',
+    titleLine1: 'Find Your',
+    titleLine2: 'Dream Property',
+    subtitle: 'Discover premium properties tailored to your lifestyle',
+    priceFrom: 'Min. Price (€)',
+    priceTo: 'Max. Price (€)',
+    searchBtn: 'Search Properties',
+    filterHint: 'Browse thousands of premium listings',
   },
 
   notifications: {

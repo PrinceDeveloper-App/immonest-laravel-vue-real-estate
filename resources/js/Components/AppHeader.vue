@@ -1,8 +1,13 @@
 <template>
   <!-- ─── Top Header ─────────────────────────────────────────────── -->
-  <header class="w-full shadow-md bg-navy">
+  <header
+    :class="[
+      'w-full transition-colors duration-300',
+      transparent ? 'bg-transparent' : 'bg-navy shadow-md',
+    ]"
+  >
     <div class="container mx-auto px-6">
-      <div class="flex items-center justify-between h-20">
+      <div class="relative flex items-center justify-between h-20">
         <!-- Left: Hamburger -->
         <button
           class="flex flex-col items-center gap-1 cursor-pointer group focus:outline-none"
@@ -20,7 +25,7 @@
         <!-- Center: Logo -->
         <Link
           class="absolute left-1/2 -translate-x-1/2 select-none"
-          :href="route('listing.index')"
+          :href="route('home')"
         >
           <span class="text-2xl font-bold tracking-widest text-white uppercase">Immo</span><span
             class="text-2xl font-bold tracking-widest uppercase text-gold"
@@ -87,7 +92,7 @@
               class="header-btn-gold"
               :href="route('login')"
             >
-              {{ t('nav.login') }}
+              {{ t('nav.signIn') }}
             </Link>
           </template>
         </div>
@@ -143,6 +148,22 @@
       <!-- Nav Links -->
       <nav class="flex flex-col px-4 pt-6 gap-1">
         <p class="text-xs font-semibold tracking-[0.2em] px-3 mb-3 text-gold/50">{{ t('nav.navigation') }}</p>
+
+        <Link
+          class="drawer-link"
+          :href="route('home')"
+          @click="openMenu = false"
+        >
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75"
+            />
+          </svg>
+          {{ t('nav.home') }}
+        </Link>
 
         <Link
           class="drawer-link"
@@ -208,6 +229,13 @@ import { route } from 'ziggy-js'
 import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
+
+defineProps({
+  transparent: {
+    type: Boolean,
+    default: false,
+  },
+})
 
 const setLocale = (lang) => {
   locale.value = lang

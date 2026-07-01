@@ -1,6 +1,7 @@
 export default {
   nav: {
     menu: 'MENÜ',
+    home: 'Startseite',
     properties: 'Immobilien',
     register: 'Registrieren',
     signIn: 'Anmelden',
@@ -89,6 +90,17 @@ export default {
     oldest: 'Älteste',
     pricey: 'Teuerste',
     cheapest: 'Günstigste',
+  },
+
+  home: {
+    badge: 'PREMIUM IMMOBILIEN',
+    titleLine1: 'Finden Sie Ihre',
+    titleLine2: 'Traumimmobilie',
+    subtitle: 'Entdecken Sie erstklassige Immobilien für Ihren Lebensstil',
+    priceFrom: 'Mindestpreis (€)',
+    priceTo: 'Höchstpreis (€)',
+    searchBtn: 'Immobilien suchen',
+    filterHint: 'Durchstöbern Sie tausende erstklassige Angebote',
   },
 
   notifications: {
