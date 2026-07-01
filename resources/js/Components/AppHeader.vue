@@ -6,7 +6,7 @@
         <!-- Left: Hamburger -->
         <button
           class="flex flex-col items-center gap-1 cursor-pointer group focus:outline-none"
-          aria-label="Open menu"
+          :aria-label="t('nav.openMenu')"
           @click="openMenu = true"
         >
           <span
@@ -14,7 +14,7 @@
             :key="n"
             class="block w-6 h-0.5 rounded-full bg-gold transition-all duration-200 group-hover:w-7"
           />
-          <span class="text-xs font-semibold tracking-widest mt-1 text-gold">MENU</span>
+          <span class="text-xs font-semibold tracking-widest mt-1 text-gold">{{ t('nav.menu') }}</span>
         </button>
 
         <!-- Center: Logo -->
@@ -26,12 +26,31 @@
             class="text-2xl font-bold tracking-widest uppercase text-gold"
           >Nest</span>
           <span class="block text-center text-xs tracking-[0.25em] font-light -mt-1 text-gold/65">
-            REAL ESTATE
+            {{ t('nav.realEstate') }}
           </span>
         </Link>
 
-        <!-- Right: Auth -->
+        <!-- Right: Auth + Language Toggle -->
         <div class="flex items-center gap-3">
+          <!-- Language Toggle -->
+          <div class="flex items-center rounded border border-gold/30 overflow-hidden text-xs font-semibold">
+            <button
+              class="px-2.5 py-1.5 transition-colors duration-150"
+              :class="locale === 'en' ? 'bg-gold text-navy' : 'text-gold/60 hover:text-gold'"
+              @click="setLocale('en')"
+            >
+              EN
+            </button>
+            <span class="w-px h-4 bg-gold/30" />
+            <button
+              class="px-2.5 py-1.5 transition-colors duration-150"
+              :class="locale === 'de' ? 'bg-gold text-navy' : 'text-gold/60 hover:text-gold'"
+              @click="setLocale('de')"
+            >
+              DE
+            </button>
+          </div>
+
           <template v-if="user">
             <Link
               class="relative text-white text-lg leading-none"
@@ -47,14 +66,14 @@
               class="hidden sm:inline text-sm font-medium text-white/80 hover:text-white transition-colors"
               :href="route('realtor.listing.index')"
             >
-              Hello, {{ user.name }}
+              {{ t('nav.hello', { name: user.name }) }}
             </Link>
             <Link
               class="header-btn-outline"
               :href="route('logout')"
               method="delete"
             >
-              Logout
+              {{ t('nav.logout') }}
             </Link>
           </template>
           <template v-else>
@@ -62,13 +81,13 @@
               class="header-btn-outline"
               :href="route('user-account.create')"
             >
-              Register
+              {{ t('nav.register') }}
             </Link>
             <Link
               class="header-btn-gold"
               :href="route('login')"
             >
-              Login
+              {{ t('nav.login') }}
             </Link>
           </template>
         </div>
@@ -97,12 +116,12 @@
           <p class="text-white font-bold tracking-widest text-lg uppercase">
             Immo<span class="text-gold">Nest</span>
           </p>
-          <p class="text-xs tracking-widest mt-0.5 text-gold/60">PREMIUM REAL ESTATE</p>
+          <p class="text-xs tracking-widest mt-0.5 text-gold/60">{{ t('nav.premiumRealEstate') }}</p>
         </div>
         <button
           class="w-8 h-8 flex items-center justify-center rounded-full border border-gold/40
                  transition-all duration-200 hover:bg-gold hover:border-gold group focus:outline-none"
-          aria-label="Close menu"
+          :aria-label="t('nav.closeMenu')"
           @click="openMenu = false"
         >
           <svg
@@ -123,7 +142,7 @@
 
       <!-- Nav Links -->
       <nav class="flex flex-col px-4 pt-6 gap-1">
-        <p class="text-xs font-semibold tracking-[0.2em] px-3 mb-3 text-gold/50">NAVIGATION</p>
+        <p class="text-xs font-semibold tracking-[0.2em] px-3 mb-3 text-gold/50">{{ t('nav.navigation') }}</p>
 
         <Link
           class="drawer-link"
@@ -138,7 +157,7 @@
               d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H15v-6H9v6H3.75A.75.75 0 013 21V9.75z"
             />
           </svg>
-          Properties
+          {{ t('nav.properties') }}
         </Link>
 
         <Link
@@ -154,7 +173,7 @@
               d="M19 21v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"
             />
           </svg>
-          Register
+          {{ t('nav.register') }}
         </Link>
 
         <Link
@@ -170,13 +189,13 @@
               d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M18 12H9m0 0l3-3m-3 3l3 3"
             />
           </svg>
-          Sign In
+          {{ t('nav.signIn') }}
         </Link>
       </nav>
 
       <!-- Footer -->
       <div class="mt-auto px-6 py-6 border-t border-gold/15">
-        <p class="text-xs text-gold/40 tracking-[0.1em]">© 2026 IMMONEST</p>
+        <p class="text-xs text-gold/40 tracking-[0.1em]">{{ t('nav.copyright') }}</p>
       </div>
     </aside>
   </Transition>
@@ -186,6 +205,14 @@
 import { ref, computed } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
 import { route } from 'ziggy-js'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
+
+const setLocale = (lang) => {
+  locale.value = lang
+  localStorage.setItem('locale', lang)
+}
 
 const openMenu = ref(false)
 const page = usePage()

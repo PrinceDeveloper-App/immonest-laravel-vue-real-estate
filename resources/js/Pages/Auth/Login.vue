@@ -2,19 +2,19 @@
   <form @submit.prevent="login">
     <div class="w-1/2 mx-auto mt-10 p-6 border rounded">
       <div>
-        <label for="email" class="label">Email (username)</label>
+        <label for="email" class="label">{{ t('auth.emailLabel') }}</label>
         <input id="email" v-model="form.email" type="text" class="input" />
         <div v-if="form.errors.email" class="input-error">{{ form.errors.email }}</div>
       </div>
       <div class="mt-4">
-        <label for="password" class="label">Password</label>
+        <label for="password" class="label">{{ t('auth.passwordLabel') }}</label>
         <input id="password" v-model="form.password" type="password" class="input" />
         <div v-if="form.errors.password" class="input-error">{{ form.errors.password }}</div>
       </div>
       <div class="mt-4">
-        <button class="btn-primary w-full" type="submit">Login</button>
+        <button class="btn-primary w-full" type="submit">{{ t('auth.loginBtn') }}</button>
         <div class="mt-4 text-center">
-          <Link :href="route('user-account.create')" class="text-sm text-blue-500">Don't have an account? Register</Link>
+          <Link :href="route('user-account.create')" class="text-sm text-blue-500">{{ t('auth.noAccount') }}</Link>
         </div>
       </div>
     </div>
@@ -23,6 +23,10 @@
 
 <script setup>
 import { useForm, Link } from '@inertiajs/vue3'
+import { useI18n } from 'vue-i18n'
+import { route } from 'ziggy-js'
+
+const { t } = useI18n()
 
 const form = useForm({
   email: '',

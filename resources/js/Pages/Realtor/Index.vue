@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-3xl mb-4">Your Listings</h1>
+  <h1 class="text-3xl mb-4">{{ t('realtor.yourListings') }}</h1>
   <section>
     <RealtorFilters :filters="filters" />
   </section>
@@ -8,67 +8,70 @@
       <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
         <div :class="{ 'opacity-25': listing.deleted_at }">
           <div
-            v-if="listing.sold_at != null" 
+            v-if="listing.sold_at != null"
             class="text-xs font-bold uppercase border border-dashed p-1 border-green-300 text-green-500 dark:border-green-600 dark:text-green-600 inline-block rounded-md mb-2"
           >
-            sold
+            {{ t('realtor.sold') }}
           </div>
           <div class="xl:flex items-center gap-2">
             <Price :price="listing.price" class="text-2xl font-medium" />
             <ListingSpace :listing="listing" />
           </div>
-
           <ListingAddress :listing="listing" />
         </div>
         <section>
-          <div
-            class="flex items-center gap-1 text-gray-600 dark:text-gray-300"
-          >
+          <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
             <a
               class="btn-outline text-xs font-medium"
               :href="route('listing.show', { listing: listing.id })"
               target="_blank"
-            >Preview</a>
+            >{{ t('realtor.preview') }}</a>
             <Link
               class="btn-outline text-xs font-medium"
               :href="route('realtor.listing.edit', { listing: listing.id })"
             >
-              Edit
+              {{ t('realtor.edit') }}
             </Link>
-          
             <Link
               v-if="!listing.deleted_at"
               class="btn-outline text-xs font-medium"
               :href="route('realtor.listing.destroy', { listing: listing.id })"
-              as="button" method="delete"
+              as="button"
+              method="delete"
             >
-              Delete
+              {{ t('realtor.delete') }}
             </Link>
-          
             <Link
-              v-else class="btn-outline text-xs font-medium"
+              v-else
+              class="btn-outline text-xs font-medium"
               :href="route('realtor.listing.restore', { listing: listing.id })"
-              as="button" method="put"
+              as="button"
+              method="put"
             >
-              Restore
-            </Link>
-          </div>
-
-          <div class="mt-2">
-            <Link :href="route('realtor.listing.image.create', { listing: listing.id })" class="block w-full btn-outline text-xs font-medium text-center">
-              Images ({{ listing.images_count }})
+              {{ t('realtor.restore') }}
             </Link>
           </div>
           <div class="mt-2">
-            <Link :href="route('realtor.listing.show', { listing: listing.id })" class="block w-full btn-outline text-xs font-medium text-center">
-              Offers ({{ listing.offers_count }})
+            <Link
+              :href="route('realtor.listing.image.create', { listing: listing.id })"
+              class="block w-full btn-outline text-xs font-medium text-center"
+            >
+              {{ t('realtor.images', { count: listing.images_count }) }}
+            </Link>
+          </div>
+          <div class="mt-2">
+            <Link
+              :href="route('realtor.listing.show', { listing: listing.id })"
+              class="block w-full btn-outline text-xs font-medium text-center"
+            >
+              {{ t('realtor.offers', { count: listing.offers_count }) }}
             </Link>
           </div>
         </section>
       </div>
     </Box>
   </section>
-  <EmptyState v-else>No listings yet</EmptyState>
+  <EmptyState v-else>{{ t('realtor.noListings') }}</EmptyState>
   <section v-if="listings.data.length" class="w-full flex justify-center mt-4 mb-4">
     <Pagination :links="listings.links" />
   </section>
@@ -82,11 +85,14 @@ import Box from '@/Components/UI/Box.vue'
 import EmptyState from '@/Components/UI/EmptyState.vue'
 import RealtorFilters from '@/Pages/Realtor/Index/Components/RealtorFilters.vue'
 import { Link } from '@inertiajs/vue3'
-import Filters from '../Listing/Index/Components/Filters.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
 import { route } from 'ziggy-js'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 defineProps({
   listings: Object,
-  filters : Object,
+  filters: Object,
 })
 </script>

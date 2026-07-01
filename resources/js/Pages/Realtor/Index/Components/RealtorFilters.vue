@@ -5,17 +5,22 @@
         <input
           id="deleted"
           v-model="filterForm.deleted"
-          type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+          type="checkbox"
+          class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
         />
-        <label for="deleted">Deleted</label>
+        <label for="deleted">{{ t('realtor.deleted') }}</label>
       </div>
       <div>
         <select v-model="filterForm.by" class="input-filter-l w-24">
-          <option value="created_at">Added</option>
-          <option value="price">Price</option>
+          <option value="created_at">{{ t('realtor.added') }}</option>
+          <option value="price">{{ t('realtor.price') }}</option>
         </select>
         <select v-model="filterForm.order" class="input-filter-r w-32">
-          <option v-for="option in sortOptions" :key="option.value" :value="option.value">
+          <option
+            v-for="option in sortOptions"
+            :key="option.value"
+            :value="option.value"
+          >
             {{ option.label }}
           </option>
         </select>
@@ -26,39 +31,28 @@
 
 <script setup>
 import { useForm, router } from '@inertiajs/vue3'
-import { watch } from 'vue'
-import { computed } from 'vue'
+import { watch, computed } from 'vue'
 import { route } from 'ziggy-js'
 import { debounce } from 'lodash'
+import { useI18n } from 'vue-i18n'
 
-const sortOptions = computed(() => sortLabels[filterForm.by])
+const { t } = useI18n()
 
-const props = defineProps({
-  filters : Object,
-})
+const props = defineProps({ filters: Object })
 
-const sortLabels = {
+const sortLabels = computed(() => ({
   created_at: [
-    {
-      label: 'Latest',
-      value: 'desc',
-    },
-    {
-      label: 'Oldest',
-      value: 'asc',
-    },
+    { label: t('realtor.latest'), value: 'desc' },
+    { label: t('realtor.oldest'), value: 'asc' },
   ],
   price: [
-    {
-      label: 'Pricey',
-      value: 'desc',
-    },
-    {
-      label: 'Cheapest',
-      value: 'asc',
-    },
+    { label: t('realtor.pricey'), value: 'desc' },
+    { label: t('realtor.cheapest'), value: 'asc' },
   ],
-}
+}))
+
+const sortOptions = computed(() => sortLabels.value[filterForm.by])
+
 const filterForm = useForm({
   deleted: props.filters.deleted ?? false,
   by: props.filters.by ?? 'created_at',
@@ -66,22 +60,23 @@ const filterForm = useForm({
 })
 
 const sendRequest = debounce(() => {
-  router.get(route('realtor.listing.index'), {
-    deleted: filterForm.deleted,
-    by: filterForm.by,
-    order: filterForm.order, 
-  }, 
-  {
-    preserveState: true,
-    preserveScroll: true,
-    replace: true,
-  })
+  router.get(
+    route('realtor.listing.index'),
+    {
+      deleted: filterForm.deleted,
+      by: filterForm.by,
+      order: filterForm.order,
+    },
+    {
+      preserveState: true,
+      preserveScroll: true,
+      replace: true,
+    },
+  )
 }, 1000)
 
 watch(
   [() => filterForm.deleted, () => filterForm.by, () => filterForm.order],
-  () => {
-    sendRequest()
-  },
+  () => { sendRequest() },
 )
 </script>
